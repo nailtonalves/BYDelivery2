@@ -17,18 +17,6 @@ def get_info():
         versao = "1.0"
     )
 
-@servico.get("/getall")
-def get_all():
-    sql = "SELECT * FROM users"
-    # Criar uma instância da classe
-    conexao = ConectToPostgreSQL()
-    conexao.get_conection()
-    resposta = conexao.execute_query(sql)
-    conexao.close_conection()
-    flattened_results = [dict(row) for row in resposta]
-    return json.dumps(flattened_results, default=str) 
-
-
 @servico.get("/login/<string:email>/<string:senha>")
 def login(email,senha ):
     sql = f"SELECT * FROM users WHERE UPPER(email) = UPPER('{email}') AND UPPER(senha) = UPPER('{senha}')"
@@ -43,10 +31,6 @@ def login(email,senha ):
             abort(404, description="Nenhum usuário encontrado para o email e senha fornecidos.")
     flattened_results = [dict(row) for row in resposta]
     return json.dumps(flattened_results, default=str) 
-    # return jsonify(
-    #     descricao = "Total: {}".format(total),
-    #     versao = "1.0"
-    # )
 
 
 if __name__ == "__main__":

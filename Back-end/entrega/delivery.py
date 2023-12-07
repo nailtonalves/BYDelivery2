@@ -61,8 +61,8 @@ def iniciar_entrega(idUsuario=0, idEntrega=0):
     except Exception as e:
         return jsonify({"erro": str(e)}), 500
 
-@servico.get("/getentrega/<int:idEntrega>")
-def get_entrega(idEntrega=0):
+@servico.get("/getentrega/<int:idUltimaEntrega>")
+def get_entrega(idUltimaEntrega=0):
     sql = ("SELECT d.id, d.id_estabelecimento, " 
     "c.endereco AS estabelecimento_endereco, c.latitude AS estabelecimento_latitude, c.longitude AS estabelecimento_longitude, "
     "d.nome_cliente, "
@@ -71,7 +71,7 @@ def get_entrega(idEntrega=0):
     "d.id_usuario, d.status, d.valor "
     "FROM deliveries d "
     "INNER JOIN companies c ON c.id = d.id_estabelecimento "
-    f"WHERE d.status = 'PENDENTE' AND d.id > {idEntrega} LIMIT 1")
+    f"WHERE d.status = 'PENDENTE' AND d.id > {idUltimaEntrega} LIMIT 1")
 
     # Criar uma instância da classe
     conexao = ConectToPostgreSQL()
