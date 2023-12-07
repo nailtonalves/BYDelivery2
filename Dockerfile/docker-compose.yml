@@ -1,0 +1,51 @@
+version: '3.0'
+services:
+  auth:
+    build: ./python
+    image: auth
+    container_name: auth
+    hostname: auth
+    volumes:
+      - '../Back-end/autenticacao:/auth'
+    command: python3 /auth/auth.py
+    ports:
+      - '5001:5000'
+  
+  review:
+    build: ./python
+    image: review
+    container_name: review
+    hostname: review
+    volumes:
+      - '../Back-end/comentario:/review'
+      - '../Back-end/autenticacao/DBConect.py:/review/DBConect.py'
+    command: python3 /review/review.py
+    ports:
+      - '5002:5000'
+
+  delivery:
+    build: ./python
+    image: delivery
+    container_name: delivery
+    hostname: delivery
+    volumes:
+      - '../Back-end/entrega:/delivery'
+      - '../Back-end/autenticacao/DBConect.py:/delivery/DBConect.py'
+    command: python3 /delivery/delivery.py
+    ports:
+      - '5003:5000'
+
+  postgres:
+    # build: ./postgres
+    image: postgres:latest
+    container_name: banco-postgresql
+    hostname: banco-postgresql
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: b_y_delivery
+    ports:
+      - "54320:5432"
+    volumes:
+      - ../Back-end/banco-postgresql/inicializar-banco.sql:/docker-entrypoint-initdb.d/inicializar-banco.sql
+      - ../Back-end/banco-postgresql/scripts:/docker-entrypoint-initdb.d/scripts
