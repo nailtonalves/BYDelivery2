@@ -25,6 +25,7 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
   static const URL_HOST_API = "http://192.168.1.8:5003";
   // ignore: constant_identifier_names
   static const SERVICE_ENTREGA = "getentrega";
+  // ignore: constant_identifier_names
   static const SERVICE_TOTAL_FATURAMENTO = "gettotalfaturamento";
 
   int idUltimaEntrega = 0;
@@ -222,23 +223,25 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
                 Expanded(
                   child: Padding(
                       padding: const EdgeInsets.fromLTRB(10, 5, 10, 0),
-                      child: AnimatedCrossFade(
-                          sizeCurve: Curves.easeInOutCubic,
-                          firstChild: CardDelivey(
-                              countdown: countdown,
-                              isRed: isRed,
-                              delivery: _delivery!),
-                          secondChild: const SizedBox(
-                            height: 50,
-                            child: Text("",
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.amber)),
-                          ),
-                          crossFadeState: _showCardDelivery
-                              ? CrossFadeState.showFirst
-                              : CrossFadeState.showSecond,
-                          duration: const Duration(milliseconds: 500))),
+                      child: _delivery == null
+                          ? const SizedBox()
+                          : AnimatedCrossFade(
+                              sizeCurve: Curves.easeInOutCubic,
+                              firstChild: CardDelivey(
+                                  countdown: countdown,
+                                  isRed: isRed,
+                                  delivery: _delivery!),
+                              secondChild: const SizedBox(
+                                height: 50,
+                                child: Text("",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.amber)),
+                              ),
+                              crossFadeState: _showCardDelivery
+                                  ? CrossFadeState.showFirst
+                                  : CrossFadeState.showSecond,
+                              duration: const Duration(milliseconds: 500))),
                 )
               ]),
             )
@@ -258,5 +261,6 @@ class _HomeViewState extends State<HomeView> with TickerProviderStateMixin {
       _valorFaturado =
           jsonData['total_faturamento'].toString().replaceAll(".", ",");
     }
+    setState(() {});
   }
 }

@@ -8,7 +8,7 @@ class ConectToPostgreSQL:
     def __init__(self):
         # Substitua os valores com suas próprias configurações
         # self.host = 'banco-postgresql'
-        self.ambiente = "LOCAL"
+        self.ambiente = "DOCKER"
         self.host = ''
         self.database = 'b_y_delivery'
         self.user = 'postgres'

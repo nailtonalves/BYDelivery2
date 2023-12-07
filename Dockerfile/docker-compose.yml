@@ -9,7 +9,7 @@ services:
       - '../Back-end/autenticacao:/auth'
     command: python3 /auth/auth.py
     ports:
-      - '5001:5000'
+      - '5001:5001'
   
   review:
     build: ./python
@@ -21,7 +21,7 @@ services:
       - '../Back-end/autenticacao/DBConect.py:/review/DBConect.py'
     command: python3 /review/review.py
     ports:
-      - '5002:5000'
+      - '5002:5002'
 
   delivery:
     build: ./python
@@ -33,7 +33,7 @@ services:
       - '../Back-end/autenticacao/DBConect.py:/delivery/DBConect.py'
     command: python3 /delivery/delivery.py
     ports:
-      - '5003:5000'
+      - '5003:5003'
 
   postgres:
     # build: ./postgres
