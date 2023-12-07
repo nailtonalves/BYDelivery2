@@ -31,7 +31,7 @@ class TesteEntregas(unittest.TestCase):
         resposta = self.acessar(f"{URL_API}/{SERVICO_TOTAL_FATURAMENTO}/{idUsuario}")
         dados = json.loads(resposta)
         # self.assertEqual(dados['total_faturamento'], None)
-        self.assertEqual(dados['total_faturamento'], "10.56")
+        self.assertEqual(dados['total_faturamento'], "10.50")
         
     def testar_03_entrega(self):
         idUltimaEntrega = 1

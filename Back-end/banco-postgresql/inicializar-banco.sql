@@ -110,6 +110,6 @@ VALUES
     ('Ana Júlia', 'Rua das Facas, 99. Recreio', -14.25535, -40.54745, 
        10.50, NULL, 1),
     ('Ricardo Silva', 'Rua Primeira, 50. Felicia', -14.25335, -40.54785, 
-       10.50, NULL, 2),
+       9.67, NULL, 2),
     ('Dora Almeida', 'Rua do Bosque, 69. Atlantica', -14.25525, -40.54795, 
-       10.50, NULL, 3);
+       4.89, NULL, 3);
